@@ -15,27 +15,27 @@ find_package(SDL2_image REQUIRED PATHS "${SDL2_image_path}")
 
 
 # Add source files to this project's executable.
-add_executable (My-CMake-Demo-Build "main.cpp" "Game.h" "Game.cpp" "Shapes.h" "Shapes.cpp" "TextureManager.h" "TextureManager.cpp")
+add_executable (${PROJECT_NAME} "main.cpp" "Game.h" "Game.cpp" "Shapes.h" "Shapes.cpp" "TextureManager.h" "TextureManager.cpp")
 
 # link the libraries
-target_link_libraries(My-CMake-Demo-Build SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image)
+target_link_libraries(${PROJECT_NAME} SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image)
 
 # finds the .dll files and copies them to the build directory
 # !!! you do not need to touch this
-add_custom_command(TARGET My-CMake-Demo-Build POST_BUILD     
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD     
     COMMAND ${CMAKE_COMMAND} -E copy_if_different  
         "${SDL2_path}/lib/x64/SDL2.dll"      
         "${SDL2_image_path}/lib/x64/SDL2_image.dll"
-        $<TARGET_FILE_DIR:My-CMake-Demo-Build>   
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>   
     COMMAND ${CMAKE_COMMAND} -E copy_directory  
         "${CMAKE_CURRENT_SOURCE_DIR}/assets"
-        $<TARGET_FILE_DIR:My-CMake-Demo-Build>/assets )
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets )
 
 
 
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET My-CMake-Demo-Build PROPERTY CXX_STANDARD 20)
+  set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 endif()
 
 # TODO: Add tests and install targets if needed.
