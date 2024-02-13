@@ -2,6 +2,7 @@
 # project specific logic here.
 #
 cmake_minimum_required (VERSION 3.20)
+project("My-CMake-Demo-Build")
 
 # create variables SDL2_path, SDL2_image_path holding the path to their folders
 # !!! you need to change the paths to match the paths on your machine
